@@ -22,6 +22,7 @@ function playDrawPoker() {
    var handValueText = document.getElementById("handValue");
    var betSelection = document.getElementById("bet");
    var bankBox = document.getElementById("bank");
+   var cardImages = document.querySelectorAll("img.cardImg");
    // Set the initial values of the pokerGame object
    pokerGame.currentBank = 500;
    pokerGame.currentBet = 25;
@@ -29,7 +30,6 @@ function playDrawPoker() {
    // Create a new deck of cards and shuffle it
    var myDeck = new pokerDeck();
    myDeck.shuffle();
-   console.log(myDeck);
 
    // Create a pokerHand object
    var myHand = new pokerHand(5);
@@ -65,7 +65,12 @@ function playDrawPoker() {
             myDeck.shuffle();
          }
          myDeck.dealTo(myHand);
-         console.log(myDeck, myHand);
+
+         // Display the card images on the table
+         for (var i = 0; i < cardImages.length; i++) {
+            cardImages[i].src = myHand.cards[i].cardImage();
+         }
+
       } else {
          alert("Reduce the size of your bet");
       }
@@ -97,3 +102,4 @@ function playDrawPoker() {
       obj.style.opacity = 1;
    }
 }
+/* ♪ I fell into a burning ring of fire, I went down, down, down and the flames went higher, and it burns, burns, burns, the ring of fire, the ring of fire ♪  */
