@@ -42,6 +42,11 @@ var pokerGame = {
    placeBet: function () {
       this.currentBank -= this.currentBet;
       return this.currentBank;
+   },
+
+   payout: function(odds) {
+      this.currentBank += this.currentBet*odds;
+      return this.currentBank;
    }
 };
 
@@ -182,5 +187,21 @@ pokerHand.prototype.handType = function() {
       var sets = this.hasSets();
       if (sets === "Pair" || sets === "none") {sets = "No Winner";}
       return sets;
+   }
+};
+
+/* Return the payout multiplier for each hand */
+pokerHand.prototype.handOdds = function() {
+   switch (this.handType()) {
+      case "Royal Flush" : return 250;
+      case "Straight Flush" : return 50;
+      case "Four of a Kind" : return 25;
+      case "Full House" : return 9;
+      case "Flush" : return 6;
+      case "Straight" : return 4;
+      case "Three of a Kind" : return 3;
+      case "Two Pair" : return 2;
+      case "Jacks or Better" : return 1;
+      default: return 0;
    }
 };
